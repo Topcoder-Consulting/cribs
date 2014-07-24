@@ -1,0 +1,31 @@
+<h2>Members' Cribs</h2>
+<ul>
+{{range .}}
+  <li><a href="/{{.Handle}}">{{.Handle}}</a></li>
+{{ end }}
+</ul>
+
+<form class="pure-form pure-form-stacked" style="padding-top:25px" action="/" method="POST">
+    <fieldset>
+        <legend>Add Your Crib!</legend>
+
+        <label for="handle">Handle</label>
+        <input id="handle" name="handle" type="text" placeholder="Your handle">
+
+        <label for="url">URL</label>
+        <input id="url" name="url" type="text" placeholder="Complete URL for images or just the ID for videos" style="width: 400px">
+
+
+        <label for="type">Type</label>
+        <select id="type" name="type">
+            <option>Image</option>            
+            <option>Youtube</option>
+            <option>Vimeo</option>
+        </select>            
+
+        <label for="description">Description</label>
+        <textarea id="description" name="description" rows="5" cols="50"></textarea>
+
+        <button type="submit" class="pure-button pure-button-primary">Submit</button>
+    </fieldset>
+</form>

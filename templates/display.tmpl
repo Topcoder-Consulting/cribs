@@ -1,0 +1,11 @@
+<h2>{{.Handle}}'s Crib</h2>
+
+{{ if eq .Type "Youtube" }} 
+  <iframe width="560" height="315" src="//www.youtube.com/embed/{{ .URL }}" frameborder="0" allowfullscreen></iframe>
+{{ else if eq .Type "Vimeo" }} 
+  <iframe src="//player.vimeo.com/video/{{ .URL }}" width="500" height="281" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+{{ else }}
+  <img src="{{ .URL }}">
+{{end}}
+
+<p>{{ .Description }}</p>
