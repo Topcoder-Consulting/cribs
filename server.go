@@ -1,6 +1,7 @@
 package main
 
 import (
+  "os"
   "github.com/codegangsta/martini"
   "github.com/codegangsta/martini-contrib/render"
   "github.com/codegangsta/martini-contrib/binding"
@@ -16,14 +17,14 @@ type Crib struct {
 }
 
 func DB() martini.Handler {
-  session, err := mgo.Dial("mongodb://localhost")
+  session, err := mgo.Dial(os.Getenv("MONGO_URL")) // mongodb://localhost
   if err != nil {
     panic(err)
   }
 
   return func(c martini.Context) {
     s := session.Clone()
-    c.Map(s.DB("local"))
+    c.Map(s.DB(os.Getenv("MONGO_DB")))
     defer s.Close()
     c.Next()
   }
