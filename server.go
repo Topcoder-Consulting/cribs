@@ -5,8 +5,8 @@ import (
   "github.com/codegangsta/martini"
   "github.com/codegangsta/martini-contrib/render"
   "github.com/codegangsta/martini-contrib/binding"
-  "gopkg.in/mgo.v2"
-  "gopkg.in/mgo.v2/bson"
+  "labix.org/v2/mgo"
+  "labix.org/v2/mgo/bson"
 )
 
 type Crib struct {
@@ -16,6 +16,9 @@ type Crib struct {
   Description string `form:"description"`
 }
 
+/* Multi-
+   called we initialize a Mongo session on localhost. DB() returns a martini.Handler which will be called on every request. We simply clone the session for every request and make sure it is closed once the request is done being processed. The important bit is the call to c.Map. This maps an instance of *mgo.Database to our request context. This allows all subsequent handler functions to specify a *mgo.Database as an argument and get it injected.
+*/
 func DB() martini.Handler {
   session, err := mgo.Dial(os.Getenv("MONGO_URL")) // mongodb://localhost
   if err != nil {
