@@ -2,6 +2,7 @@ package main
 
 import (
   "os"
+  "net/http"
   "github.com/codegangsta/martini"
   "github.com/codegangsta/martini-contrib/render"
   "github.com/codegangsta/martini-contrib/binding"
@@ -82,6 +83,6 @@ func main() {
     r.HTML(200, "display", Fetch(db, params["handle"]))    
   })    
 
-  m.Run()
+  http.ListenAndServe(":8080", m)
 
 }
